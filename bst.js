@@ -93,12 +93,36 @@ const removeNode = (node,value) => {
 this.root = removeNode(this.root , value)
 }
 
+isValidBst(root){
+    let isValidSubtree = (node , min ,max) => {
+        if(!node) return true;
+        if(
+            (min !== null && node.value <= min) || (max !== null && node.value >= max)
+        ){
+return false
+        }
+        return (
+             isValidSubtree(node.left , min , node.value) &&
+            isValidSubtree(node.right , node.value , max)
+             )
+            }
+            return isValidSubtree(root , null ,null);
+}
+
 }
 const bst = new BinarySearchTree();
-bst.insert(10)
-bst.insert(5)
-bst.insert(15)
-bst.insert(2)
-bst.remove(5)
+// bst.insert(10)
+// bst.insert(5)
+// bst.insert(15)
+// bst.insert(2)
+// bst.remove(5)
 //bst.printBst();
-console.log(bst.lookUp(10))
+//console.log(bst.lookUp(10))
+//////////////////
+bst.insert(8)
+bst.insert(4)
+bst.insert(7)
+bst.insert(2)
+bst.insert(6)
+bst.printBst();
+console.log(bst.isValidBst(8))
